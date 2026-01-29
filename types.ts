@@ -44,3 +44,17 @@ export interface Order {
   status: 'pending' | 'preparing' | 'delivering' | 'completed';
   timestamp: number;
 }
+
+export interface Coupon {
+  id: string;
+  title: string;
+  amount: number;
+  minSpend: number;
+  expiry: string;
+}
+
+export interface ToastMessage {
+  id: string;
+  text: string;
+  type: 'success' | 'error' | 'info';
+}
