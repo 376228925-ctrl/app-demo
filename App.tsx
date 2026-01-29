@@ -11,18 +11,21 @@ import Profile from './views/Profile';
 import AIChat from './views/AIChat';
 import BottomNav from './components/BottomNav';
 
-interface CartContextType {
+interface AppContextType {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
   totalAmount: number;
+  address: string;
+  setAddress: (addr: string) => void;
 }
 
-export const CartContext = createContext<CartContextType | undefined>(undefined);
+export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [address, setAddress] = useState<string>('北京中关村大厦 A座');
 
   const addToCart = (item: CartItem) => {
     setCart(prev => {
@@ -49,9 +52,12 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const totalAmount = useMemo(() => cart.reduce((acc, item) => acc + (item.price * item.quantity), 0), [cart]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, totalAmount }}>
+    <AppContext.Provider value={{ 
+      cart, addToCart, removeFromCart, clearCart, totalAmount, 
+      address, setAddress 
+    }}>
       {children}
-    </CartContext.Provider>
+    </AppContext.Provider>
   );
 };
 

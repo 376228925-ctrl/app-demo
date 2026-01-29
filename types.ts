@@ -30,11 +30,10 @@ export interface CartItem extends FoodItem {
   restaurantName: string;
 }
 
-export interface User {
+export interface AddressResult {
   name: string;
-  address: string;
-  phone: string;
-  avatar: string;
+  district: string;
+  description: string;
 }
 
 export interface Order {

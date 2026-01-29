@@ -2,12 +2,15 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, MapPin, ChevronRight, Clock, ShoppingBag } from 'lucide-react';
-import { CartContext } from '../App';
+// Changed CartContext to AppContext as it is the correctly exported member from App.tsx
+import { AppContext } from '../App';
 
 const Cart: React.FC = () => {
   const navigate = useNavigate();
-  const context = useContext(CartContext);
+  // Use AppContext instead of the non-existent CartContext
+  const context = useContext(AppContext);
 
+  // Safely check if context is available and if the cart has items
   if (!context || context.cart.length === 0) {
     return (
       <div className="h-screen flex flex-col items-center justify-center bg-gray-50">
@@ -39,7 +42,8 @@ const Cart: React.FC = () => {
                 <MapPin size={12} />
                 <span>收货地址</span>
               </div>
-              <h3 className="font-bold text-base">北京中关村大厦 A座 1001室</h3>
+              {/* Display address from context instead of hardcoded text */}
+              <h3 className="font-bold text-base">{context.address}</h3>
               <p className="text-xs text-gray-500 mt-1">张先生 138****0000</p>
             </div>
             <ChevronRight size={20} className="text-gray-300" />
@@ -55,6 +59,7 @@ const Cart: React.FC = () => {
       <div className="px-4 -mt-8">
         {/* Order Details */}
         <div className="bg-white rounded-xl p-4 shadow-sm space-y-4">
+          {/* Restaurant name from the first item in the cart */}
           <h2 className="font-bold text-sm border-b pb-2">{context.cart[0].restaurantName}</h2>
           {context.cart.map(item => (
             <div key={item.id} className="flex justify-between items-center">
@@ -89,6 +94,7 @@ const Cart: React.FC = () => {
       <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t p-4 flex justify-between items-center safe-bottom z-50">
         <div className="flex items-baseline gap-1">
           <span className="text-xs text-gray-500">合计</span>
+          {/* Total amount calculated from cart items plus fees */}
           <span className="text-xl font-bold text-red-500">￥{context.totalAmount + 2}</span>
           <span className="text-[10px] text-gray-400">已优惠￥5</span>
         </div>
