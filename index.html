@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SmartEats - 智能点餐</title>
+    <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        /* 使用中国区访问更稳定的 loli.net 字体镜像替代 google fonts */
+        @import url('https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
         body {
             font-family: 'Noto+Sans+SC', sans-serif;
             background-color: #f7f8fa;
@@ -36,5 +38,8 @@
 </head>
 <body>
     <div id="root"></div>
+    <!-- 核心修复：显式引用入口文件 -->
+    <!-- 即使是构建工具（如 Vite）也需要此标签来建立依赖图，否则 dist 下的 HTML 是不含 JS 的 -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
