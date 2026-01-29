@@ -1,0 +1,7 @@
+{
+  "name": "SmartEats - AI Powered Food Delivery",
+  "description": "A feature-rich food delivery application inspired by Meituan and Ele.me, featuring AI-driven food recommendations, smart search, and a seamless ordering experience.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
